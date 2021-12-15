@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      TodoApp
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,27 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">TodoApp</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-list>
+    <ion-item>
+      <ion-input type="text" placeholder="Add Task" [(ngModel)]="todoInput"></ion-input>  
+      <ion-icon slot="end" style="cursor: pointer;" name="add" (click)="addTask()"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <div style="background-color:#ffefef; padding: 0.5em; font-size: 20px; color:#f75e5e">
+    <ion-datetime style="text-align: center" display-format="MMM DD, YYYY" [value]="currDate"></ion-datetime>
+  </div>
+
+  <ion-label ><h1 style="text-align: center; color:#4e7fd6; margin-top: 0.5em; font-weight: bold;">List of todos</h1></ion-label>
+
+  <ion-list>
+    <div class="itemStyle" *ngFor="let item of tasks; let i = index" (mouseenter)="itemMouseEnter(i)" (mouseleave)="itemMouseLeave(i)" >
+      <ion-label class="ion-text-wrap" style="font-weight: bold; text-transform: capitalize;">{{item.name}}</ion-label>
+      <ion-icon name="trash" title="delete" (click)="deleteTask(item.id)" style="font-size: 25px; color:#f75e5e; cursor: pointer;" [style.display]="item.displayTodo"></ion-icon>
+    </div>
+  </ion-list>
 </ion-content>
